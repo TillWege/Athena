@@ -1,4 +1,4 @@
 # Athena
-A Simple remainder App that utalises Microsfts new .net Maui runtime
+A simple reminder App that utilizes Microsofts new .net Maui runtime
 
-Uses a MongoDB Database, such that multiple clients can share the sam Events and their respective Statuses
+Uses a MongoDB Database, so that multiple clients can share the same Events and their respective Statuses
