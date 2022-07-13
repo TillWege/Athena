@@ -15,7 +15,7 @@
 		<ApplicationTitle>Client</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.client</ApplicationId>
+		<ApplicationId>de.wegetill.Athena</ApplicationId>
 		<ApplicationIdGuid>723697C6-955C-4284-857E-0A055B5EBAE5</ApplicationIdGuid>
 
 		<!-- Versions -->
