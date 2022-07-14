@@ -19,14 +19,14 @@ namespace Athena.Server
             DatabaseConnection.Open();
         }
 
-        public async void test()
+        public async void Test()
         {
-            await using var cmd = new NpgsqlCommand("SELECT * FROM information_schema.tables", DatabaseConnection);
+            await using var cmd = new NpgsqlCommand("SELECT * FROM tasks", DatabaseConnection);
             await using var reader = await cmd.ExecuteReaderAsync();
 
             while (await reader.ReadAsync())
             {
-                Console.WriteLine(reader.GetString(0));
+                Console.WriteLine(reader.GetInt32(0));
             }
 
         }

@@ -84,7 +84,7 @@ namespace Athena.Server
         public static async void TestDB()
         {
             var ctx = new Database();
-            ctx.test();
+            ctx.Test();
         }
     }
 }
