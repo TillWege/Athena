@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 using System.Net;
-using System.Threading.Tasks;
+using Server;
 
 namespace AthenaServer
 {
@@ -68,6 +66,10 @@ namespace AthenaServer
 
         public static void Main(string[] args)
         {
+            TestDB();
+
+            return;
+
             listener = new HttpListener();
             listener.Prefixes.Add(url);
             listener.Start();
@@ -77,6 +79,17 @@ namespace AthenaServer
             listenTask.GetAwaiter().GetResult();
 
             listener.Close();
+        }
+
+        public static async void TestDB()
+        {
+            await using var ctx = new Database();
+            //await ctx.Database.EnsureDeletedAsync();
+            //await ctx.Database.EnsureCreatedAsync();
+
+            ctx.Tasks.Add(new() { Name = "FooTask" });
+
+            await ctx.SaveChangesAsync();
         }
     }
 }
