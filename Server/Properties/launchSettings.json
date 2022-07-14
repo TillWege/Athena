@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Server - Windows": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\Code\\Athena"
+    },
+    "Server - MacBook": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\Code\\Athena"
+    }
+  }
+}

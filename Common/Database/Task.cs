@@ -1,4 +1,4 @@
-﻿namespace AthenaCommon
+﻿namespace Athena.Common
 {
     public class Task
     {

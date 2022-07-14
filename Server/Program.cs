@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using System.Net;
-using Server;
+using Athena.Common;
 
-namespace AthenaServer
+namespace Athena.Server
 {
     class HttpServer
     {
@@ -25,7 +25,7 @@ namespace AthenaServer
             "</html>";
 
 
-        public static async Task HandleIncomingConnections()
+        public static async System.Threading.Tasks.Task HandleIncomingConnections()
         {
             bool runServer = true;
 
@@ -66,16 +66,16 @@ namespace AthenaServer
 
         public static void Main(string[] args)
         {
+            DotEnv.Load(".env");
             TestDB();
 
-            return;
 
             listener = new HttpListener();
             listener.Prefixes.Add(url);
             listener.Start();
             Console.WriteLine("Listening for connections on {0}", url);
 
-            Task listenTask = HandleIncomingConnections();
+            System.Threading.Tasks.Task listenTask = HandleIncomingConnections();
             listenTask.GetAwaiter().GetResult();
 
             listener.Close();
@@ -83,13 +83,8 @@ namespace AthenaServer
 
         public static async void TestDB()
         {
-            await using var ctx = new Database();
-            //await ctx.Database.EnsureDeletedAsync();
-            //await ctx.Database.EnsureCreatedAsync();
-
-            ctx.Tasks.Add(new() { Name = "FooTask" });
-
-            await ctx.SaveChangesAsync();
+            var ctx = new Database();
+            ctx.test();
         }
     }
 }

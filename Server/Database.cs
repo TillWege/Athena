@@ -1,13 +1,36 @@
-using Microsoft.EntityFrameworkCore;
+using Athena.Common;
+using Npgsql;
 
-namespace Server
+namespace Athena.Server
 {
-    public class Database : DbContext
+    public class Database
     {
-        public DbSet<AthenaCommon.Task> Tasks { get; set; }
+        readonly NpgsqlConnection DatabaseConnection;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql(@"Host=XXX:5432;Username=XXX;Password=XXX;Database=athena");
+        public Database()
+        {
+            var dbURL = Environment.GetEnvironmentVariable("DB_URL");
+            var dbUser = Environment.GetEnvironmentVariable("DB_USER");
+            var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
+            var ConnectionString = String.Format(@"Host={0};Username={1};Password={2};Database=athena", dbURL, dbUser, dbPassword);
+
+
+            DatabaseConnection = new NpgsqlConnection(ConnectionString);
+            DatabaseConnection.Open();
+        }
+
+        public async void test()
+        {
+            await using var cmd = new NpgsqlCommand("SELECT * FROM information_schema.tables", DatabaseConnection);
+            await using var reader = await cmd.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                Console.WriteLine(reader.GetString(0));
+            }
+
+        }
+
 
     }
 }
