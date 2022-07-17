@@ -14,7 +14,6 @@ namespace Athena.Server
             var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
             var ConnectionString = String.Format(@"Host={0};Username={1};Password={2};Database=athena", dbURL, dbUser, dbPassword);
 
-
             DatabaseConnection = new NpgsqlConnection(ConnectionString);
             DatabaseConnection.Open();
         }
